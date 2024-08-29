@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Feedback Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        .form-field {
+            margin-bottom: 15px;
+        }
+
+        .form-field label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-field input,
+        .form-field textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .form-submit {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .form-submit:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="advanced-form" class="form-container"></div>
+
+    <script>
+        const formElement = document.createElement('form');
+        formElement.action = '#';
+        formElement.method = 'post';
+
+        const fields = [
+            { type: 'text', name: 'fullname', label: 'Full Name', required: true },
+            { type: 'email', name: 'email', label: 'Email Address', required: true },
+            { type: 'textarea', name: 'message', label: 'Your Message', required: true }
+        ];
+
+        fields.forEach(({ type, name, label, required }) => {
+            const fieldContainer = document.createElement('div');
+            fieldContainer.className = 'form-field';
+
+            const fieldLabel = document.createElement('label');
+            fieldLabel.textContent = label;
+
+            let inputElement;
+            if (type === 'textarea') {
+                inputElement = document.createElement('textarea');
+            } else {
+                inputElement = document.createElement('input');
+                inputElement.type = type;
+            }
+
+            inputElement.name = name;
+            if (required) inputElement.required = true;
+
+            fieldContainer.appendChild(fieldLabel);
+            fieldContainer.appendChild(inputElement);
+            formElement.appendChild(fieldContainer);
+        });
+
+        const submitButton = document.createElement('button');
+        submitButton.className = 'form-submit';
+        submitButton.type = 'submit';
+        submitButton.textContent = 'Send Message';
+
+        formElement.appendChild(submitButton);
+        document.getElementById('advanced-form').appendChild(formElement);
+    </script>
+
+</body>
+
+</html>
